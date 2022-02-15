@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 
 @Component({
   selector: 'app-progress',
@@ -6,11 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: [ './progress.component.css'
   ]
 })
-export class ProgressComponent implements OnInit {
+export class ProgressComponent {
 
-  constructor() { }
+  progress : number = 40;
 
-  ngOnInit(): void {
+  get getProgress() {
+      return this.progress + '%';
+  }
+
+  valores(val : number){
+
+    if(this.progress >= 100 && val >= 0){
+      return this.progress = 100;
+    }
+    else if(this.progress <= 0 && val < 0){
+      return this.progress = 0;
+    }
+    return this.progress = this.progress + val;
   }
 
 }

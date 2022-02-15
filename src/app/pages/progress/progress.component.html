@@ -5,7 +5,10 @@
             <h4 class="card-title">Default Progress bars <a class="get-code" data-toggle="collapse" href="#pgr2" aria-expanded="true"><i class="fa fa-code" title="Get Code" data-toggle="tooltip"></i></a></h4>
             <div class="collapse m-t-15" id="pgr2"> <pre class="line-numbers language-javascript"><code>&lt;div class="progress"&gt;<br/>&lt;div class="progress-bar bg-success" role="progressbar" style="width: 75%;height:15px;" role="progressbar""&gt; 75% &lt;/div&gt;<br/>&lt;/div&gt;</code></pre> </div>
             <div class="progress m-t-20">
-                <div class="progress-bar bg-success active progress-bar-striped" style="width: 75%; height:15px;" role="progressbar">75%</div>
+                <div class="progress-bar bg-success active progress-bar-striped" 
+                style="height:15px;" 
+                [style.width]="getProgress"
+                role="progressbar"></div>
             </div>
         </div>
     </div>
@@ -18,13 +21,13 @@
             <div class="card-body">
                 <div class="input-group">
                     <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">
+                    <button class="btn btn-primary" (click)="valores(-5)" type="button">
                         <i class="fa fa-minus"></i>
                     </button>
                     </span>
-                    <input type="text" class="form-control" placeholder="Product name">
+                    <input type="number" [(ngModel)]="progress" class="form-control" placeholder="Product name">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button">
+                        <button class="btn btn-primary" (click)="valores(5)" type="button">
                             <i class="fa fa-plus"></i>
                         </button>
                     </span>
