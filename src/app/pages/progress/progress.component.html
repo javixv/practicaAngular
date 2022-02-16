@@ -7,7 +7,14 @@
             <div class="progress m-t-20">
                 <div class="progress-bar bg-success active progress-bar-striped" 
                 style="height:15px;" 
-                [style.width]="getProgress"
+                [style.width]="getProgreso1"
+                role="progressbar"></div>
+            </div>
+
+            <div class="progress m-t-20">
+                <div class="progress-bar bg-info active progress-bar-striped" 
+                style="height:15px;" 
+                [style.width]="getProgreso2"
                 role="progressbar"></div>
             </div>
         </div>
@@ -19,26 +26,14 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <div class="input-group">
-                    <span class="input-group-btn">
-                    <button class="btn btn-primary" (click)="valores(-5)" type="button">
-                        <i class="fa fa-minus"></i>
-                    </button>
-                    </span>
-                    <input type="number" [(ngModel)]="progress" class="form-control" placeholder="Product name">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" (click)="valores(5)" type="button">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </span>
-                </div>
+                <app-incrementador (valorSalda)="progreso1 = $event" [progress] = 'progreso1'></app-incrementador>
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                2
+                <app-incrementador [btnClass]="'btn btn-info'" (valorSalda)="progreso2 = $event" [progress] = 'progreso2'></app-incrementador>
             </div>
         </div>
     </div>
