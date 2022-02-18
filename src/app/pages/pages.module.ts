@@ -33,7 +33,7 @@ import { ComponentsModule } from '../components/components.module';
     RouterModule,
     FormsModule,
     ComponentsModule,
-    NgChartsModule
+    
   ]
 })
 export class PagesModule { }

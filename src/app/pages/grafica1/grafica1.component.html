@@ -1,6 +1,6 @@
 <div class="row">
                     <div class="col-6">
-                        <div class="card">
+                        <!-- <div class="card">
                             <div class="card-body">
                                 
                                 <div style="display: block">
@@ -11,6 +11,14 @@
                                     </canvas>
                                   </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <app-dona title="Ventas"></app-dona>
                     </div>
+                    <div class="col-6">
+                      
+                      <app-dona
+                       [labels]="mislabels"                       
+                       title="Compras"
+                      ></app-dona>
+                  </div>
 </div> 
