@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 
@@ -23,7 +24,8 @@ import { PromesasComponent } from './promesas/promesas.component';
     Grafica1Component,
     PagesComponent,
     AccountSettingsComponent,
-    PromesasComponent
+    PromesasComponent,
+    RxjsComponent
   ],
   exports : [
     DashboardComponent,
