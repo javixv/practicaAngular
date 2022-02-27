@@ -1,24 +1,32 @@
-import { Component } from '@angular/core';
-import { Observable, retry } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
+import { filter, interval, map, Observable, retry, Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-rxjs',
   templateUrl: './rxjs.component.html',
   styleUrls: ['./rxjs.component.css']
 })
-export class RxjsComponent  {
+export class RxjsComponent implements OnDestroy {
+
+  miSuscripon : Subscription
 
   constructor() {
 
     
-    this.reotrnaObservable().pipe(
-        retry(1)
-      ).subscribe(
-        valor => console.log('Subs: ' + valor),
-        error=> console.warn(error),
-        () => console.info('observe terminado')
-      );
-   }
+    // this.reotrnaObservable().pipe(
+    //     retry(1)
+    //   ).subscribe(
+    //     valor => console.log('Subs: ' + valor),
+    //     error=> console.warn(error),
+    //     () => console.info('observe terminado')
+    //   );
+
+    this.miSuscripon = this.retornaIntervalo().subscribe(console.log)
+  }
+
+  ngOnDestroy(): void {
+    this.miSuscripon.unsubscribe();
+  }
 
 
    reotrnaObservable() : Observable<number> {
@@ -40,6 +48,16 @@ export class RxjsComponent  {
         }
       },1000)
     })
+   }
+
+
+   retornaIntervalo(){
+     return interval(1000)
+              .pipe(
+                //take(10),
+                map(val => val +1)
+                ,filter(val => (val % 2 == 0) ? true : false)
+              )
    }
 
    
