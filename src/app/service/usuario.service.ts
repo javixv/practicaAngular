@@ -15,4 +15,8 @@ export class UsuarioService {
   crearUsuario(formData : any){
     return this.http.post(this.url_api +'/usuarios',formData)
   }
+
+  login(formData : any){
+    return this.http.post(this.url_api +'/login',formData)
+  }
 }

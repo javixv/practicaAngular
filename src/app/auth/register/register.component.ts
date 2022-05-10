@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioService } from 'src/app/service/usuario.service';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -39,7 +39,9 @@ export class RegisterComponent {
     this.usuarioService.crearUsuario(this.registerForm.value).subscribe( resp => {
       console.log('usuario creado')
       console.log(resp)
-    },err => {console.log(err.error.msj)})
+    },err => {console.log(err.error.msj)
+     Swal.fire('Error', err.error.msj,'error' )
+    })
   }
 
   validarCampo(campo : string) : boolean {
