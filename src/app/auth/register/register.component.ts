@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/service/usuario.service';
 import Swal from 'sweetalert2'
 @Component({
@@ -25,7 +26,7 @@ export class RegisterComponent {
   )
 
   constructor(private fb : FormBuilder,
-    private usuarioService : UsuarioService) { }
+    private usuarioService : UsuarioService,private router: Router) { }
 
   crearUsuario(){
     this.formSubmmit = true;
@@ -39,6 +40,9 @@ export class RegisterComponent {
     this.usuarioService.crearUsuario(this.registerForm.value).subscribe( resp => {
       console.log('usuario creado')
       console.log(resp)
+      // Navegar al Dashboard
+      this.router.navigateByUrl('/');
+
     },err => {console.log(err.error.msj)
      Swal.fire('Error', err.error.msj,'error' )
     })
@@ -57,26 +61,30 @@ export class RegisterComponent {
     const pass1 = this.registerForm.get('password')?.value
     const pass2 = this.registerForm.get('password2')?.value
 
-    if(pass1 === pass2){
+    if((pass1 !== pass2) && this.formSubmmit){
       return false
     }else{
       return true;
     }
   }
+  aceptaTerminos() {
+    return !this.registerForm.get('terminos')?.value && this.formSubmmit;
+  }
 
-  passwordIguales(pass1Name : string, pass2Name : string){
-    return (formGroup : FormGroup) => {
+  passwordsIguales(pass1Name: string, pass2Name: string ) {
 
-      const pass1 = formGroup.get(pass1Name);
-      const pass2 = formGroup.get(pass2Name);
+    return ( formGroup: FormGroup ) => {
 
-      if(pass1 === pass2){
-        pass2?.setErrors(null)
-      }else {
-        pass2?.setErrors({noEsIgual : true})
+      const pass1Control = formGroup.get(pass1Name);
+      const pass2Control = formGroup.get(pass2Name);
+
+      if ( pass1Control?.value === pass2Control?.value ) {
+        pass2Control?.setErrors(null)
+      } else {
+        pass2Control?.setErrors({ noEsIgual: true })
       }
+
 
     }
   }
-
 }

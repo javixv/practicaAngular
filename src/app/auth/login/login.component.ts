@@ -13,8 +13,10 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   public formSubmmit = false;
+  public auth2: any;
+  
   public loginForm = this.fb.group({
-    email     : ['test100@localhost.com', Validators.required],
+    email     : [ localStorage.getItem('email') || '', Validators.required],
     password  : ['123456', Validators.required],
     remember  : [false]    
   }
@@ -30,11 +32,19 @@ export class LoginComponent implements OnInit {
   login() {
     ///console.log(this.loginForm.value)
     this.usuarioService.login(this.loginForm.value).subscribe(resp => {
-      console.log(resp)
+      if(this.loginForm.get('remember')?.value){
+        localStorage.setItem('email', this.loginForm.get('email')?.value)
+      }else {
+        localStorage.removeItem('email')
+      }
+
+       // Navegar al Dashboard
+       this.router.navigateByUrl('/');
+
     },err => {
       Swal.fire('Error', err.error.msj,'error' )
      })
-    // this.router.navigateByUrl('/');
+    
   }
   
 }
