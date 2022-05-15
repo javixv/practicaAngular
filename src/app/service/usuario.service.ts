@@ -4,6 +4,7 @@ import { tap, map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import {environment} from '../../environments/environment';
+import { Usuarios } from '../models/usuarios.model';
 
 
 @Injectable({
@@ -13,6 +14,7 @@ export class UsuarioService {
   
   url_api = environment.urlapi
   public auth2: any;
+  public usuario! : Usuarios
 
   constructor( private http: HttpClient, 
                 private router: Router,
@@ -34,6 +36,7 @@ export class UsuarioService {
   }
 
   validarToken(): Observable<boolean> {
+    console.log('entro a validar el token')
     const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${ this.url_api }/login/renew`, {
@@ -42,10 +45,16 @@ export class UsuarioService {
       }
     }).pipe(
       tap( (resp: any) => {
+        console.log(resp)
+        const {nombre,email,img,google,rol,uid } = resp.usuario
+        this.usuario = new Usuarios(nombre,email,'',img,google,rol,uid)        
+        this.usuario.imprimirUsuario();
         localStorage.setItem('token', resp.token );
       }),
       map( resp => true),
-      catchError( error => of(false) )
+      catchError( error => {
+        console.log(error)
+        return of(false)} )
     );
 
   }

@@ -10,4 +10,8 @@ export class Usuarios {
         public uid? : string
     ){   
     }
+    
+    imprimirUsuario(){
+        console.log(this.nombre)
+    }
 }
