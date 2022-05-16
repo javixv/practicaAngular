@@ -48,7 +48,7 @@ export class UsuarioService {
         console.log(resp)
         const {nombre,email,img,google,rol,uid } = resp.usuario
         this.usuario = new Usuarios(nombre,email,'',img,google,rol,uid)        
-        this.usuario.imprimirUsuario();
+        
         localStorage.setItem('token', resp.token );
       }),
       map( resp => true),

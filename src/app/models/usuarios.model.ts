@@ -1,3 +1,7 @@
+import { environment } from "src/environments/environment"
+
+const urlapi = environment.urlapi
+
 export class Usuarios {
 
     constructor(
@@ -11,7 +15,11 @@ export class Usuarios {
     ){   
     }
     
-    imprimirUsuario(){
-        console.log(this.nombre)
+    get imagenUrl(){
+        if(this.img){
+            return `${urlapi}/upload/usuarios/${this.img}`
+        }else{
+            return `${urlapi}/upload/usuarios/no-img`
+        }
     }
 }
