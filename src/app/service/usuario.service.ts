@@ -23,6 +23,14 @@ export class UsuarioService {
     //this.googleInit();
   }
 
+  get token() : string {
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid() : string {
+    return this.usuario.uid || '';
+  }
+
   logout() {
     localStorage.removeItem('token');
 
@@ -36,12 +44,12 @@ export class UsuarioService {
   }
 
   validarToken(): Observable<boolean> {
-    console.log('entro a validar el token')
-    const token = localStorage.getItem('token') || '';
+    // console.log('entro a validar el token')
+    // const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${ this.url_api }/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     }).pipe(
       tap( (resp: any) => {
@@ -69,5 +77,17 @@ export class UsuarioService {
     return this.http.post(this.url_api +'/login',formData).pipe(tap( ( resp : any) => {
       localStorage.setItem('token', resp.token)
     }))
+  }
+
+  actualizarPerfil(data : {email : string, nombre : string,role ?:string}) {
+    data = {
+      ...data,
+      role : this.usuario.role
+    }
+    return this.http.put(this.url_api +'/usuarios/'+this.uid ,data,{
+      headers: {
+        'x-token': this.token
+      }
+    })
   }
 }
