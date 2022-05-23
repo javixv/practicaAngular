@@ -29,11 +29,13 @@
             <p class="text-muted m-b-30 font-13"> imagen del usuario </p>
             <img src="">
             <div class="form-group">
-            <input type="file">
+            <input type="file" (change)="cargarImg($event)">
             </div>
             <br>
             <br>
-            <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+            <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10"
+            (click)="subirImg()"
+            [disabled]="!imagenasubir">
              <i class="fa fa-save"></i> Subir imagen</button>
         </div>
     </div>
