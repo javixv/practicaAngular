@@ -23,8 +23,14 @@ export class FileUploadService {
           body : formData
         })
 
-        console.log(resp)
-        return true;
+        //console.log(resp)
+        const data = await resp.json();
+        if(data.ok){
+          return data.nombreArchivo
+        }else{
+          return false;
+        }
+        
     }catch(error){
         console.log(error)
         return false
