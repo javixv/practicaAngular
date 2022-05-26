@@ -66,7 +66,13 @@ export class UsuarioService {
     );
 
   }
-
+ get Tokens(){
+   return {
+    headers: {
+      'x-token': this.token
+    }
+   }
+ }
   crearUsuario(formData : any){
     return this.http.post(this.url_api +'/usuarios',formData).pipe(tap( ( resp : any) => {
       localStorage.setItem('token', resp.token)
@@ -82,12 +88,16 @@ export class UsuarioService {
   actualizarPerfil(data : {email : string, nombre : string,role ?:string}) {
     data = {
       ...data,
-      role : this.usuario.role
+      role : this.usuario.rol
     }
     return this.http.put(this.url_api +'/usuarios/'+this.uid ,data,{
       headers: {
         'x-token': this.token
       }
     })
+  }
+
+  obtenerUsuarios(desde : number = 0){
+    return this.http.get<any>(this.url_api+'/usuarios?desde='+desde,this.Tokens)
   }
 }
