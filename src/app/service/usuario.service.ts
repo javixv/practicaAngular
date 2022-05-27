@@ -99,5 +99,17 @@ export class UsuarioService {
 
   obtenerUsuarios(desde : number = 0){
     return this.http.get<any>(this.url_api+'/usuarios?desde='+desde,this.Tokens)
+               .pipe(
+                 map(resp => {
+                   console.log(resp)
+                   const usuarios = resp.usuarios.map(
+                     (user : any) => new Usuarios(user.nombre,user.email,'',user.img,user.google,user.rol,user.uid) 
+                   );
+                   return {
+                     total : resp.total,
+                     usuarios
+                   };
+                 })
+               );
   }
 }

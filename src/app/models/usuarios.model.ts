@@ -16,7 +16,10 @@ export class Usuarios {
     }
     
     get imagenUrl(){
-        if(this.img){
+        if(!this.img){
+            return `${urlapi}/upload/usuarios/no-img`
+        }
+        else if(this.img){
             return `${urlapi}/upload/usuarios/${this.img}`
         }else{
             return `${urlapi}/upload/usuarios/no-img`
