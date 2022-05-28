@@ -2,12 +2,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input type="text" class="form-control" placeholder="Buscar usuarios..">
+                <input type="text" class="form-control" placeholder="Buscar usuarios.."
+                (keyup)="buscar(texto.value)"
+                #texto>
             </div>
         </div>
     </div>
 </div>
-<div class="row animeted fadeIn fast">
+<div class="row animeted fadeIn fast" *ngIf="cargando">
     <div class="col-12">
         <div class="alert alert-info text-center" role="alert">
             <h4 class="alert-heading">Cargando...</h4>
@@ -18,7 +20,7 @@
 </div>
 
 <!--Tablas-->
-<div class="">
+<div class="" *ngIf="!cargando">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Usuarios</h4>
