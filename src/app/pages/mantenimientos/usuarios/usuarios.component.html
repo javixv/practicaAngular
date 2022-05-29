@@ -55,9 +55,11 @@
                     </tbody>
                 </table>
             </div>
-            <button (click)="paginarUsuarios(-5)" class="btn btn-secondary">Anterior</button>
-            &nbsp;
-            <button (click)="paginarUsuarios(5)" class="btn btn-secondary">Siguiente</button>
+            <div *ngIf="texto.value.length == 0">
+                <button (click)="paginarUsuarios(-5)" class="btn btn-secondary">Anterior</button>
+                &nbsp;
+                <button (click)="paginarUsuarios(5)" class="btn btn-secondary">Siguiente</button>
+            </div>
         </div>
     </div>
 </div>
